@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>WTPITT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -130,6 +130,11 @@
         // set loading animation to visible
         $('#loadingAnimation').css("display","inherit");
 
+        // Scroll down to results area
+        $('html, body').animate({
+            scrollTop: $("#searchResults").offset().top - 60
+        }, 2000);
+
         movieTitle1 = $("#movieTitle1Input").val().split(' ').join('+');
         movieTitle2 = $("#movieTitle2Input").val().split(' ').join('+');
         $.ajax({
@@ -153,7 +158,7 @@
               //alert("temp array length is " + tempArray.length);
               return tempArray;          
             })
-            $('#movie1Info').html("<h3>" + movieTitle1JSON['results'][0]['original_title'] + "</h3><br />");
+            $('#movie1Info').html("<h3>" + movieTitle1JSON['results'][0]['original_title'] + "</h3>");
             $('#movie1Info').append("<img src=http://image.tmdb.org/t/p/h632" + movieTitle1JSON['results'][0]['backdrop_path'] + " class='img-polaroid' style='width:50%' />")
         });
         $.ajax({
@@ -179,18 +184,13 @@
               //findCommonActor();
               return tempArray;
             })
-            $('#movie2Info').html("<h3>" + movieTitle2JSON['results'][0]['original_title'] + "</h3><br />");
+            $('#movie2Info').html("<h3>" + movieTitle2JSON['results'][0]['original_title'] + "</h3>");
             $('#movie2Info').append("<img src=http://image.tmdb.org/t/p/h632" + movieTitle2JSON['results'][0]['backdrop_path'] + " class='img-polaroid' style='width:50%' />")
         });
-
-        //var lookupTimeoutID = window.setTimeout(alertMe, 5000);
 
       }
 
       function findCommonActor(){
-        /*console.log(cast1);
-        console.log(cast2);
-*/
         for(var i = 0; i < cast1.responseJSON.cast.length; i++){
           for(var j = 0; j < cast2.responseJSON.cast.length; j++){
             if(cast1.responseJSON.cast[i].name == cast2.responseJSON.cast[j].name){
@@ -198,8 +198,6 @@
             }
           }
         }
-
-        $('#loadingAnimation').css("display","none");
 
         if(matchArray.length == 0){
           $('#searchResults').append("<h3>Sorry, no matches found</h3>");
@@ -218,6 +216,13 @@
             });
           })(i);
         };
+
+        $('#loadingAnimation').css("display","none");
+
+        // scroll again now that searchResults area is populated
+        $('html, body').animate({
+            scrollTop: $("#searchResults").offset().top - 60
+        }, 2000);
       }
     </script>
   </body>

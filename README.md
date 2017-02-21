@@ -3,4 +3,4 @@ whosthatpersoninthatthing
 
 A web app that takes two movies or TV shows and identifies the common cast members, so you can figure out whos that person in that thing?
 
-[Live Demo](http://experimental.alexdglover.com/wtpitt/)
+[Live Demo](http://alexdglover.github.io/whosthatpersoninthatthing/)
